@@ -1,5 +1,7 @@
 import sys
 import pygame
+from settings import Settings
+from ship import Ship
 
 
 class AlienInvasion():
@@ -10,9 +12,12 @@ class AlienInvasion():
         """Initialize the game and create game resources.
         """
         pygame.init()
+        self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((1200,800))
-        pygame.display.set_caption("Alien Invasion")
+        self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
+        pygame.display.set_caption(self.settings.game_title)
+        
+        self.ship = Ship(self)
 
     def run_game(self):
         """Start the main loop for the game

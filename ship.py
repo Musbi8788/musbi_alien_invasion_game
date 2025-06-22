@@ -1,6 +1,6 @@
 import pygame
 
-class Ship():
+class Ship:
     """A class to manage the ship.
     """
 
@@ -18,7 +18,7 @@ class Ship():
         self.rect = self.image.get_rect()
 
         # Start each new ship at the bottom center on the screen
-        self.rect.midbottom = self.screen_rect.midbottom
+        self.rect.midbottom = self.screen_rect.midtop
 
     def blitme(self):
         """Draw the ship at it current location.
