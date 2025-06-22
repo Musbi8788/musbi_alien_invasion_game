@@ -1,7 +1,7 @@
 import sys
 import pygame
 from settings import Settings
-from ship import Ship
+from ship import Ship, Chess
 
 
 class AlienInvasion():
@@ -18,6 +18,7 @@ class AlienInvasion():
         pygame.display.set_caption(self.settings.game_title)
 
         self.ship = Ship(self)
+        self.chess = Chess(self)
 
 
     def run_game(self):

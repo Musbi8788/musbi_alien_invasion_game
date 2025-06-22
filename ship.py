@@ -24,3 +24,24 @@ class Ship:
         """Draw the ship at it current location.
         """
         self.screen.blit(self.image, self.rect)
+
+class Chess:
+    """A class represent the chees broad
+    """
+    def __init__(self, c_game):
+        # set the screen rect
+        self.screen = c_game.screen
+        self.screen_rect = self.screen.get_rect()
+
+        # upload the image
+        self.image = pygame.image.load('images/chess.bmp')
+        self.rect = self.image.get_rect()
+
+        # Start each new chess at the top of the screen
+        self.rect.midtop = self.screen_rect.midtop
+
+    def blitme(self):
+        """Draw the chess at the screen
+        """
+        self.screen.blit(self.image, self.rect)
+
