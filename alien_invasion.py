@@ -29,8 +29,6 @@ class AlienInvasion():
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
 
-        self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
-        pygame.display.set_caption(self.settings.game_title)
 
     def run_game(self):
         """Start the main loop for the game
