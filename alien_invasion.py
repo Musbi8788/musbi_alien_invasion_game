@@ -83,13 +83,6 @@ class AlienInvasion():
         pygame.display.flip()
 
 
-        # redraw the screen through the loop pass
-        self.screen.fill(self.settings.bg_color)
-
-        # Make the most recently display visible
-        pygame.display.flip()
-
-
 if __name__ == "__main__":
     """Make the game instance and run the game.
     """

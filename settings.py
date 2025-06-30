@@ -5,6 +5,7 @@ class Settings():
     def __init__(self):
         """Initialize the game's settings.
         """
+        
         # Ship settings
         self.ship_speed = 1.5
 
