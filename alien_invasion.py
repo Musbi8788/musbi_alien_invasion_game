@@ -79,4 +79,4 @@ if __name__ == "__main__":
     """Make the game instance and run the game.
     """
     ai = AlienInvasion()
-    ai.run_game()
+    ai.run_game() # run the game
