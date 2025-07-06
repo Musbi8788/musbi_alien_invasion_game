@@ -1,3 +1,4 @@
+# import statements
 import sys
 import pygame
 from settings import Settings
@@ -12,7 +13,9 @@ class AlienInvasion():
     def __init__(self,):
         """Initialize the game and create game resources.
         """
+        # The game resources
         pygame.init()
+        
         self.settings = Settings()
 
         # # Fullscreen mode
@@ -23,10 +26,11 @@ class AlienInvasion():
         # Normal size 
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
-    
+        
         pygame.display.set_caption(self.settings.game_title)
-
+        
         self.ship = Ship(self)
+        # Make the bullets in a pygame group form 
         self.bullets = pygame.sprite.Group()
 
 
