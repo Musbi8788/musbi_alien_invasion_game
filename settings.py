@@ -21,3 +21,6 @@ class Settings():
         self.screen_height = 650
         self.bg_color = (130, 200, 229)
         self.game_title = "Alien Invasion"
+
+        # Alien settings
+        self.alien_speed = 1.0
