@@ -31,11 +31,11 @@ class AlienInvasion():
         pygame.display.set_caption(self.settings.game_title)
         
         self.ship = Ship(self)
-        # Make the bullets in a pygame group form 
+        # Make the bullets and aliens in a pygame group form 
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
 
-        # create fleet mean alien
+        # create fleet mean group of aliens  
         self._create_fleet()
 
 
@@ -154,7 +154,7 @@ class AlienInvasion():
 
 
     def _change_fleet_direction(self):
-        """Drop the entire and fleet and change the fleet's direction.
+        """Drop the entire fleet and change the fleet's direction.
         """
         for alien in self.aliens.sprites():
             alien.rect.y += self.settings.fleet_drop_speed
