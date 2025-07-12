@@ -28,7 +28,7 @@ self.rect.x = self.x # update the aliens position
 ### Dropping the fleet and changing direction
 
 ```
-def _update_aliens(self):
+ def _update_aliens(self):
         """Check if an alien is at edge, 
             then update the position of all aliens in the fleet.
         """
@@ -52,3 +52,14 @@ def _update_aliens(self):
         self.settings.fleet_direction *= -1
 
 ```
+
+
+### Shotting Aliens
+
+we'll us sprite.groupcollide() methods to check it two group element detected
+
+# Checking if two element have detected
+
+``` pygame.sprite.groupcollide(self.aliens, self.bullets, True, True) ```
+
+This code will get rid of any aliens that have been hit with the bullets
