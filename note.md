@@ -63,3 +63,5 @@ we'll us sprite.groupcollide() methods to check it two group element detected
 ``` pygame.sprite.groupcollide(self.aliens, self.bullets, True, True) ```
 
 This code will get rid of any aliens that have been hit with the bullets
+
+I adjust the bullets speed by 1.5
