@@ -118,7 +118,7 @@ class AlienInvasion():
         # if aliens don't exist create a new fleet of aliens
         if not self.aliens:
             # Destory existing bullets and create new fleet
-            self.aliens.empty()  # destory the aliens
+            self.bullets.empty()  # destory the bullets
             self._create_fleet()  # create new fleet of aliens
 
 
