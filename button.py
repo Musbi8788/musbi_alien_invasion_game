@@ -15,12 +15,18 @@ class Button:
         self.text_color = (255, 255, 255)
         self.font = pygame.font.SysFont(None, 48)
 
+        self.hover_color = (100, 100, 255)
+
         # Build the button's rect object and center it.
         self.rect = pygame.Rect(0,0, self.width, self.height)
         self.rect.center = center
 
         # The button message need to be prepped only once
         self._prep_msg(msg)
+
+    def _hover_button_color(self):
+        """Set the hover color"""
+        self.button_color = self.hover_color
 
     def _prep_msg(self, msg,):
         """Trun msg into a rendered image and center text on the button."""
