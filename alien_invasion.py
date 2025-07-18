@@ -6,6 +6,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from scoreboard import Scoreboard
 
 from button import Button
 from ship import Ship
@@ -38,8 +39,10 @@ class AlienInvasion():
 
         pygame.display.set_caption(self.settings.game_title)
 
-        # Create an instance to store the game statistics
+        # Create an instance to the stats
+        # and create a scoreboard
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         self.ship = Ship(self)
         # Make the bullets and aliens in a pygame group form
@@ -53,7 +56,7 @@ class AlienInvasion():
         self.easy_button = Button(self, "Easy", center=(500, 310))
         self.medium_button = Button(self, "Medium", center=(500, 390))
         self.hard_button = Button(self, "Hard", center=(500, 470))
-        
+
 
 
     def run_game(self):
@@ -86,6 +89,7 @@ class AlienInvasion():
                 self._check_play_button(mouse_pos)
 
 
+
     def _start_game(self):
         """Respond to start the game"""
         if not self.stats.game_active: # Allow user to start the game if the game is inactive
@@ -104,6 +108,17 @@ class AlienInvasion():
 
             # Hide the mouse
             pygame.mouse.set_visible(False)
+
+    def _set_difficulty(self, level):
+        """Reponse to the game difficulty
+        level: will determine which level you are start on the game.
+        """
+        if level == "easy":
+            self.settings.initialize_dynamic_settings()
+        elif level == "medium":
+            self.settings.medium_speed()
+        elif level == "hard":
+            self.settings.hard_speed()
         
 
     def _check_play_button(self, mouse_pos):
@@ -117,19 +132,19 @@ class AlienInvasion():
 
         if button_clicked and not self.stats.game_active: # Only make the button clickable when the game is inactive
             # Reset the game settings
-            self.settings.initialize_dynamic_settings() # Start from level one
+            self._set_difficulty("easy") # Start from level one
             
 
         # Only make the button clickable when the game is inactive
         elif medium_button_clicked and not self.stats.game_active:
             # Reset the game settings
-            self.settings.medium_speed()  # Start from hard level 
+            self._set_difficulty("medium")  # Start from medium level 
             
 
         # Only make the button clickable when the game is inactive
         elif hard_button_clicked and not self.stats.game_active:
             # Reset the game settings
-            self.settings.hard_speed()  # Start from hard level 
+            self._set_difficulty("hard")  # Start from hard level 
 
         self._start_game()
 
@@ -189,6 +204,10 @@ class AlienInvasion():
 
         collisions = pygame.sprite.groupcollide(
             self.bullets, self.aliens, True , True)  # change False to True after
+        
+        if collisions:
+            self.stats.score += self.settings.alien_points # increase player score
+            self.sb.prep_score()
 
         # if aliens don't exist create a new fleet of aliens
         if not self.aliens:
@@ -306,12 +325,16 @@ class AlienInvasion():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
 
+        # Draw the score information
+        self.sb.show_score()
+
         # Draw the play buttons if the game is inactive.
         if not self.stats.game_active:
             self.easy_button.draw_button()
-            self.medium_button.draw_button()
-            self.hard_button.draw_button()
+            # self.medium_button.draw_button()
+            # self.hard_button.draw_button()
 
+        
 
         pygame.display.flip()
 
