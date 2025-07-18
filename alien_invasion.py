@@ -132,21 +132,44 @@ class AlienInvasion():
 
         if button_clicked and not self.stats.game_active: # Only make the button clickable when the game is inactive
             # Reset the game settings
-            self._set_difficulty("easy") # Start from level one
+            self._set_difficulty("easy") # Start from the easy level
+
+            # Rest the game statistics
+            self.reset_game_settings()
+
             
 
         # Only make the button clickable when the game is inactive
         elif medium_button_clicked and not self.stats.game_active:
             # Reset the game settings
             self._set_difficulty("medium")  # Start from medium level 
+
+            # Rest the game statistics
+            self.reset_game_settings()
+
             
 
         # Only make the button clickable when the game is inactive
         elif hard_button_clicked and not self.stats.game_active:
             # Reset the game settings
-            self._set_difficulty("hard")  # Start from hard level 
+            self._set_difficulty("hard")  # Start from the hard level
+
+            # Rest the game statistics
+            self.reset_game_settings()
+
+
+    def reset_game_settings(self):
+        """Reponse to resetting the game settings"""
+        # Rest the game statistics
+        self.stats.rest_stats()
+        self.stats.game_active = True
+        self.sb.prep_score()  # Reset the score to 0
 
         self._start_game()
+
+        pygame.mouse.set_visible(False)
+
+
 
     def _check_keydown_events(self, event):
         """Respond to key presses
@@ -206,7 +229,8 @@ class AlienInvasion():
             self.bullets, self.aliens, True , True)  # change False to True after
         
         if collisions:
-            self.stats.score += self.settings.alien_points # increase player score
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points *len(aliens) # increase the player score when ever the bullet collided with an alien.
             self.sb.prep_score()
 
         # if aliens don't exist create a new fleet of aliens
