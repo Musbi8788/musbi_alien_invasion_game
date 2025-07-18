@@ -6,8 +6,12 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+
 from button import Button
+from hard_button import HardButton
+from medium_button import MediumButton
 from ship import Ship
+
 
 from bullet import Bullet
 from alien import Alien
@@ -48,7 +52,13 @@ class AlienInvasion():
         self._create_fleet()
 
         # Make the play button
-        self.play_button = Button(self, "Play")
+        self.play_button = Button(self, "Easy")
+
+        # Make the game level buttons
+        self.medium_button = MediumButton(self, "Medium")
+        self.hard_button = HardButton(self, "Hard")
+        
+
 
     def run_game(self):
         """Start the main loop for the game
@@ -101,13 +111,31 @@ class AlienInvasion():
         
 
     def _check_play_button(self, mouse_pos):
-        """Start a new game when the player clicks Play"""
-        button_clicked = self.play_button.rect.collidepoint(mouse_pos) 
+        """Start a new game when the player clicks a level"""
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+
+        medium_button_clicked = self.medium_button.rect.collidepoint(mouse_pos)
+
+        hard_button_clicked = self.hard_button.rect.collidepoint(mouse_pos)
+
 
         if button_clicked and not self.stats.game_active: # Only make the button clickable when the game is inactive
             # Reset the game settings
-            self.settings.increase_speed() # Start for level one
-            self._start_game()
+            self.settings.initialize_dynamic_settings() # Start from level one
+            
+
+        # Only make the button clickable when the game is inactive
+        elif medium_button_clicked and not self.stats.game_active:
+            # Reset the game settings
+            self.settings.medium_speed()  # Start from hard level 
+            
+
+        # Only make the button clickable when the game is inactive
+        elif hard_button_clicked and not self.stats.game_active:
+            # Reset the game settings
+            self.settings.hard_speed()  # Start from hard level 
+
+        self._start_game()
 
     def _check_keydown_events(self, event):
         """Respond to key presses
@@ -123,8 +151,7 @@ class AlienInvasion():
             self._fire_bullet()
 
         elif event.key == pygame.K_p:
-            """"""
-            self._start_game()
+            self._start_game() # Start as Easy with P key is pressed
         
 
         elif event.key == pygame.K_q:
@@ -286,6 +313,9 @@ class AlienInvasion():
         # Draw the play button if the game is inactive.
         if not self.stats.game_active:
             self.play_button.draw_button()
+            self.medium_button.draw_button()
+            self.hard_button.draw_button()
+
 
         pygame.display.flip()
 
