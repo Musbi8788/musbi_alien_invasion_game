@@ -33,3 +33,7 @@ make the game to show the game over button when the user fail
 ### Resetting the Game
 
 ```pygame.mouse.set_visible(False) #Hide the mouse```
+
+
+## Scroing the player score
+
