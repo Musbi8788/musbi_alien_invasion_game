@@ -231,7 +231,8 @@ class AlienInvasion():
         if collisions:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points *len(aliens) # increase the player score when ever the bullet collided with an alien.
-            self.sb.prep_score()
+            self.sb.prep_score() # prepare the score
+            self.sb.check_high_score() # update the high score
 
         # if aliens don't exist create a new fleet of aliens
         if not self.aliens:

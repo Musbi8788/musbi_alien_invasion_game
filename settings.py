@@ -53,7 +53,7 @@ class Settings():
         self.alien_speed *= self.speedup_scale
 
         self.alien_points = int(self.alien_points * self.score_scale) # increase the score point when the game increase
-        print(self.alien_points)
+    
         
     def medium_speed(self):
         """Medium speed settings"""
