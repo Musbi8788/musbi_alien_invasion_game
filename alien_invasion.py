@@ -8,8 +8,6 @@ from settings import Settings
 from game_stats import GameStats
 
 from button import Button
-from hard_button import HardButton
-from medium_button import MediumButton
 from ship import Ship
 
 
@@ -52,11 +50,9 @@ class AlienInvasion():
         self._create_fleet()
 
         # Make the play button
-        self.play_button = Button(self, "Easy")
-
-        # Make the game level buttons
-        self.medium_button = MediumButton(self, "Medium")
-        self.hard_button = HardButton(self, "Hard")
+        self.easy_button = Button(self, "Easy", center=(500, 310))
+        self.medium_button = Button(self, "Medium", center=(500, 390))
+        self.hard_button = Button(self, "Hard", center=(500, 470))
         
 
 
@@ -112,7 +108,7 @@ class AlienInvasion():
 
     def _check_play_button(self, mouse_pos):
         """Start a new game when the player clicks a level"""
-        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        button_clicked = self.easy_button.rect.collidepoint(mouse_pos)
 
         medium_button_clicked = self.medium_button.rect.collidepoint(mouse_pos)
 
@@ -310,9 +306,9 @@ class AlienInvasion():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
 
-        # Draw the play button if the game is inactive.
+        # Draw the play buttons if the game is inactive.
         if not self.stats.game_active:
-            self.play_button.draw_button()
+            self.easy_button.draw_button()
             self.medium_button.draw_button()
             self.hard_button.draw_button()
 

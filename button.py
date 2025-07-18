@@ -4,7 +4,7 @@ class Button:
     """ A Class to Create the Start Button
     """
 
-    def __init__(self, ai_game, msg):
+    def __init__(self, ai_game, msg, center):
         """Initialize the button attributes"""
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
@@ -17,12 +17,12 @@ class Button:
 
         # Build the button's rect object and center it.
         self.rect = pygame.Rect(0,0, self.width, self.height)
-        self.rect.center = self.screen_rect.center
+        self.rect.center = center
 
         # The button message need to be prepped only once
         self._prep_msg(msg)
 
-    def _prep_msg(self, msg):
+    def _prep_msg(self, msg,):
         """Trun msg into a rendered image and center text on the button."""
 
         self.msg_image = self.font.render(msg, True, self.text_color, self.button_color)
