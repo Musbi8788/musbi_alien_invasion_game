@@ -105,7 +105,8 @@ class AlienInvasion():
         button_clicked = self.play_button.rect.collidepoint(mouse_pos) 
 
         if button_clicked and not self.stats.game_active: # Only make the button clickable when the game is inactive
-
+            # Reset the game settings
+            self.settings.increase_speed() # Start for level one
             self._start_game()
 
     def _check_keydown_events(self, event):
@@ -171,6 +172,7 @@ class AlienInvasion():
             # Destory existing bullets and create new fleet
             self.bullets.empty()  # destory the bullets
             self._create_fleet()  # create new fleet of aliens
+            self.settings.increase_speed() # level up the game
 
     def _create_fleet(self):
         """Create the fleet of alien
