@@ -6,6 +6,7 @@ class Button:
 
     def __init__(self, ai_game, msg, center):
         """Initialize the button attributes"""
+        self.settings = ai_game.settings
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
 
@@ -24,7 +25,7 @@ class Button:
         """Respond to the button settings"""
         # Set the dimenson and properties the of the button
         self.width, self.height = 200, 50
-        self.button_color = (0, 255, 0)
+        self.button_color = self.settings.secondary_color
         self.text_color = (255, 255, 255)
         self.font = pygame.font.SysFont(None, 48)
 
