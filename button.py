@@ -9,13 +9,9 @@ class Button:
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
 
-        # Set the dimenson and properties the of the button
-        self.width, self.height = 200, 50
-        self.button_color = (0, 255, 0)
-        self.text_color = (255, 255, 255)
-        self.font = pygame.font.SysFont(None, 48)
+        self.button_settings()
 
-        self.hover_color = (100, 100, 255)
+        
 
         # Build the button's rect object and center it.
         self.rect = pygame.Rect(0,0, self.width, self.height)
@@ -23,6 +19,16 @@ class Button:
 
         # The button message need to be prepped only once
         self._prep_msg(msg)
+
+    def button_settings(self):
+        """Respond to the button settings"""
+        # Set the dimenson and properties the of the button
+        self.width, self.height = 200, 50
+        self.button_color = (0, 255, 0)
+        self.text_color = (255, 255, 255)
+        self.font = pygame.font.SysFont(None, 48)
+
+        self.hover_color = (100, 100, 255)
 
     def _hover_button_color(self):
         """Set the hover color"""
