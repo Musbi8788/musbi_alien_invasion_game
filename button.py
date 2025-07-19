@@ -27,7 +27,8 @@ class Button:
         self.width, self.height = 200, 50
         # self.button_color = self.color
         self.text_color = (255, 255, 255)
-        self.font = pygame.font.SysFont(None, 48)
+        self.font = pygame.font.SysFont(
+            'Times New Roman', bold=True, size=30, italic=True)
 
         self.hover_color = (100, 100, 255)
 
