@@ -69,12 +69,15 @@ class Scoreboard:
         self.high_score_str = "High Score: " + "{:,}".format(high_score)
         self.high_score_image = self.font.render(self.high_score_str, True, self.text_color, self.settings.bg_color)
 
+        self.center_high_score()
+
+    def center_high_score(self):
+        """Center the game high score."""
         # Center the high score at the top of the screen.
         self.high_score_rect = self.high_score_image.get_rect() # get the rect position of the high score
         self.high_score_rect.centerx = self.screen_rect.centerx # set the high score at the center
         self.high_score_rect.top = self.score_rect.top # position the high score at the top
 
-        """The appove code will center top the high score"""
 
     def check_high_score(self):
         """Check to see if there's a new high score."""
