@@ -12,6 +12,12 @@ class Alien(Sprite):
         self.screen = ai_game.screen
         self.settings = ai_game.settings
 
+        # Alien image
+        self.alien_image()
+    
+    def alien_image(self):
+        """Respond for the alien images"""
+
         # Load the image and set it rect attributes
         self.image = pygame.image.load("images/alien.bmp")
         self.rect = self.image.get_rect()
