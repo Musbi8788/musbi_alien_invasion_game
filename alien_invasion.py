@@ -78,6 +78,7 @@ class AlienInvasion():
         """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self._save_high_score()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
@@ -171,6 +172,11 @@ class AlienInvasion():
 
         pygame.mouse.set_visible(False)
 
+    def _save_high_score(self):
+        """Store the high score it a text file"""
+        with open("high_score.txt", "w") as file:
+            file.write(str(self.stats.high_score))
+
 
 
     def _check_keydown_events(self, event):
@@ -191,6 +197,7 @@ class AlienInvasion():
         
 
         elif event.key == pygame.K_q:
+            self._save_high_score()
             sys.exit()
 
     def _check_keyup_events(self, event):
@@ -235,6 +242,7 @@ class AlienInvasion():
                 self.stats.score += self.settings.alien_points *len(aliens) # increase the player score when ever the bullet collided with an alien.
             self.sb.prep_score() # prepare the score
             self.sb.check_high_score() # update the high score
+        
 
         # if aliens don't exist create a new fleet of aliens
         if not self.aliens:
