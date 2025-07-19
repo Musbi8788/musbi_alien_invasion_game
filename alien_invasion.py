@@ -164,6 +164,8 @@ class AlienInvasion():
         self.stats.rest_stats()
         self.stats.game_active = True
         self.sb.prep_score()  # Reset the score to 0
+        self.sb.prep_level() # Reset the game level
+        self.sb.prep_ships() # Reset the ships 
 
         self._start_game()
 
@@ -241,6 +243,10 @@ class AlienInvasion():
             self._create_fleet()  # create new fleet of aliens
             self.settings.increase_speed() # level up the game
 
+            # Increase level
+            self.stats.level += 1
+            self.sb.prep_level() # update level image
+
     def _create_fleet(self):
         """Create the fleet of alien
         """
@@ -311,8 +317,10 @@ class AlienInvasion():
         # Allow the user to start over if ship is still available with them
         if self.stats.ships_left > 0:
 
-            # Decrement ships_left
+            # Decrement ships_left and update scoreboard
             self.stats.ships_left -= 1 
+            self.sb.prep_ships() 
+
 
             # Get rid of any remaining aliens and bullets
             self.aliens.empty()
