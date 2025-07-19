@@ -29,11 +29,11 @@ class AlienInvasion():
         self.settings = Settings()
 
         # # Fullscreen mode
-        # self.full_screen()
+        self.full_screen()
 
         # Normalscreen mode
-        self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
+        # self.screen = pygame.display.set_mode(
+        #     (self.settings.screen_width, self.settings.screen_height))
 
         pygame.display.set_caption(self.settings.game_title)
 
@@ -339,7 +339,7 @@ class AlienInvasion():
 
             # Decrement ships_left and update scoreboard
             self.stats.ships_left -= 1
-            self.sb.prep_ships()
+            self.sb.prep_lifes()
 
             self.destory_ship_bullets_aliens()
 
@@ -361,7 +361,7 @@ class AlienInvasion():
         self._create_fleet()
         self.ship.center_ship()
 
-        
+
 
     def _check_aliens_bottom(self):
         """Check if any aliens have reached the bottom of the screen."""
@@ -377,9 +377,8 @@ class AlienInvasion():
         """Draw the level button
         easy, medium, hard"""
         self.easy_button.draw_button()
-        # Uncomment below to have 3 game levels - easy, medium, hard.
-        # self.medium_button.draw_button()
-        # self.hard_button.draw_button()
+        self.medium_button.draw_button()
+        self.hard_button.draw_button()
 
     def _update_screen(self):
         """Update image on the screen and flip to the new screen
