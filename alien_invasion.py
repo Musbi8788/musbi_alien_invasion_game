@@ -164,13 +164,11 @@ class AlienInvasion():
         # Rest the game statistics
         self.stats.rest_stats()
         self.stats.game_active = True
-        self.sb.prep_score()  # Reset the score to 0
-        self.sb.prep_level() # Reset the game level
-        self.sb.prep_ships() # Reset the ships 
-        # self.sb.prep_images()
-
+        # Reset the text images
+        self.sb.prep_images()
         self._start_game()
 
+        # Show the cursor
         pygame.mouse.set_visible(False)
 
     def _save_high_score(self):
