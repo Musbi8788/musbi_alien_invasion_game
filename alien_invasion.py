@@ -56,9 +56,13 @@ class AlienInvasion():
         """Respond to the play button levels"""
         # Make the play button
         center_x = 500
-        self.easy_button = Button(self, "Easy", center=(center_x, 310))
-        self.medium_button = Button(self, "Medium", center=(center_x, 390))
-        self.hard_button = Button(self, "Hard", center=(center_x, 470))
+        self.easy_button = Button(self, "Easy", center=(
+            center_x, 310), color=(78, 181, 135))
+        
+        self.medium_button = Button(
+            self, "Medium", center=(center_x, 390), color=(0, 0, 255))
+        self.hard_button = Button(self, "Hard", center=(center_x, 470), color=(255, 0, 0))
+        
 
     def full_screen(self):
         """Create a fullscreen"""
