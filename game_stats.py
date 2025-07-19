@@ -7,6 +7,10 @@ class GameStats:
         self.rest_stats()
         # Start game in an inactive state
         self.game_active = False
+        self.read_high_score()
+
+    def read_high_score(self):
+        """Read the high score and set the """
 
         # High score should never be reset.
         try:
@@ -14,10 +18,13 @@ class GameStats:
                 all_time_high_score = content.read()
                 
             self.high_score = int(all_time_high_score)
-
+        
         except FileNotFoundError:
             self.high_score = 0
+            with open("high_score.txt", "w") as content:
+                content.write(str(self.high_score))
 
+            
     def rest_stats(self,):
         """Initialize statistics that can change during the game."""
         self.ships_left = self.settings.ship_limit

@@ -58,7 +58,6 @@ class AlienInvasion():
         self.hard_button = Button(self, "Hard", center=(500, 470))
 
 
-
     def run_game(self):
         """Start the main loop for the game
         """
@@ -138,7 +137,7 @@ class AlienInvasion():
             # Rest the game statistics
             self.reset_game_settings()
 
-            
+        
 
         # Only make the button clickable when the game is inactive
         elif medium_button_clicked and not self.stats.game_active:
@@ -172,10 +171,8 @@ class AlienInvasion():
         pygame.mouse.set_visible(False)
 
     def _save_high_score(self):
-        """Store the high score it a text file"""
-        with open("high_score.txt", "w") as file:
-            file.write(str(self.stats.high_score))
-
+        """Store the high score in a text file"""
+        self.stats.read_high_score()
 
 
     def _check_keydown_events(self, event):
