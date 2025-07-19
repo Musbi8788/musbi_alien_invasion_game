@@ -353,7 +353,7 @@ class AlienInvasion():
 
     def destory_ship_bullets_aliens(self):
         """Respond to destory the ship-aliens-bellets"""
-        # Get rid of any remaining aliens and bullets
+        # Get rid of any remaining aliens and bullets on the screen
         self.aliens.empty()
         self.bullets.empty()
 
