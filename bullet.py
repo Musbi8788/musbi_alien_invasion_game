@@ -18,6 +18,10 @@ class Bullet(Sprite):
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.color = ai_game.settings.bullet_color
+        self.create_bullet(ai_game)
+
+    def create_bullet(self, ai_game):
+        """Create a bullet"""
 
         # Create a bullet at (0, 0) and then set a correct position.
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)
