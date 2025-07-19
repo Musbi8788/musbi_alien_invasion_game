@@ -16,11 +16,11 @@ class Scoreboard:
         self.stats = ai_game.stats
 
         # Font settings for scoring information.
-        self.text_color = (255, 0, 0)
+        self.level_color = (78, 181, 135)
         self.score_color = self.settings.secondary_color 
         self.high_score_color = (0, 100, 0)
         # set the font size and use defualt font style.
-        self.font = pygame.font.SysFont(None, 40)
+        self.font = pygame.font.SysFont('Arial', bold=True, size=30, italic=True)
         self.prep_images()
 
     def prep_images(self,):
@@ -46,7 +46,7 @@ class Scoreboard:
         level_str = "Level: " + str(self.stats.level)
         self.level_image = self.font.render(
             # generate the level text image
-            level_str, True, self.text_color, self.settings.bg_color)
+            level_str, True, self.level_color)
 
         # Position the level below the score
         self.level_rect = self.level_image.get_rect()
@@ -62,7 +62,7 @@ class Scoreboard:
         score_str = "Score: " + "{:,}".format(rounded_score)
 
         self.score_image = self.font.render(
-            score_str, True, self.score_color, self.settings.bg_color)
+            score_str, True, self.score_color)
 
         # Display the score at the top right of the screen.
         self.score_rect = self.score_image.get_rect()
@@ -74,7 +74,7 @@ class Scoreboard:
         high_score = round(self.stats.high_score, - 1)
         self.high_score_str = "High Score: " + "{:,}".format(high_score)
         self.high_score_image = self.font.render(
-            self.high_score_str, True, self.high_score_color, self.settings.bg_color)
+            self.high_score_str, True, self.high_score_color)
 
         self.center_high_score()
 

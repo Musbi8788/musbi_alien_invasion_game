@@ -4,6 +4,8 @@ from time import sleep
 
 import pygame
 
+import pygame.mixer
+
 from settings import Settings
 from game_stats import GameStats
 from scoreboard import Scoreboard
