@@ -3,7 +3,7 @@ import sys
 from time import sleep
 
 import pygame
-
+import pygame.mixer
 
 from settings import Settings
 from game_stats import GameStats
@@ -47,6 +47,10 @@ class AlienInvasion():
         # Make the bullets and aliens in a pygame group form
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
+
+        # Add sound effect
+        self.shooting_sfx = pygame.mixer.Sound("./sounds/shooting1.mp3")
+        self.ship_sfx = pygame.mixer.Sound("./sounds/ship_hit.mp3")
 
         self._create_fleet()
 
@@ -205,6 +209,7 @@ class AlienInvasion():
             self.ship.moving_left = True
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+            self.shooting_sfx.play()
 
         elif event.key == pygame.K_p:
             self._start_game()  # Start as Easy with P key is pressed
@@ -346,11 +351,11 @@ class AlienInvasion():
             # Decrement ships_left and update scoreboard
             self.stats.ships_left -= 1
             self.sb.prep_lifes()
-
+            self.ship_sfx.play()
             self.destory_ship_bullets_aliens()
 
             # Pause
-            sleep(0.5)
+            sleep(0.8)
 
         else:
             self.stats.game_active = False  # End the game
@@ -377,6 +382,8 @@ class AlienInvasion():
             if alien.rect.bottom >= screen_rect.bottom:
                 # Treat this the same as the ship got hit.
                 self._ship_hit()
+                # add sound
+                self.ship_sfx.play()
                 break
 
     def _draw_level_button(self):
