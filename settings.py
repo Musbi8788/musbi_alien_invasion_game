@@ -49,6 +49,9 @@ class Settings():
         # Scoring 
         self.alien_points = 50
 
+        # Color 
+        self.secondary_color = (0, 200, 0)
+
         # fleet_direction of 1 represents right, -1 represents left.
         self.fleet_direction = 1
 
