@@ -1,7 +1,7 @@
 import pygame.font
-from pygame.sprite import Group # We are importing a group of ship
+from pygame.sprite import Group  # We are importing a group of life
 
-from ship import Ship # will be change to life later
+from life import Life
 
 
 class Scoreboard:
@@ -17,44 +17,50 @@ class Scoreboard:
 
         # Font settings for scoring information.
         self.text_color = (30, 30, 30)
-        self.font = pygame.font.SysFont(None, 48) # set the font size and use defualt font style.
+        # set the font size and use defualt font style.
+        self.font = pygame.font.SysFont(None, 48)
+        self.prep_images()
 
-        # prepare the initail score images 
+    def prep_images(self,):
+        """Prepare the initail images"""
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
-        self.prep_ships() # will be change to life
+        self.prep_lifes()  # will be change to life
 
-    def prep_ships(self):
-        """Show how many ships left."""
-        self.ships = Group() # set the ships group
-        for ship_number in range(self.stats.ships_left): # display the ships left
-            ship = Ship(self.ai_game) # create an instance of ship
-            # Position the ships left to the left top screen
-            ship.rect.x = 10 + ship_number * ship.rect.width 
-            ship.rect.y = 10
-            self.ships.add(ship) # add the ships 
+    def prep_lifes(self):
+        """Show how many lifes left."""
+        self.lifes = Group()  # set the lifes group
+        for life_number in range(self.stats.ships_left):  # display the ships left
+            life = Life(self.ai_game)  # create an instance of life
+            # Position the lifes left to the left top screen
+            life.rect.x = 10 + life_number * life.rect.width
+            life.rect.y = 10
+            self.lifes.add(life)  # add the lifes
             """this make the ship appear next to each other (-_-)  (-_-)  (-_-) """
-
 
     def prep_level(self):
         """Turn the level into a rendered image."""
         level_str = "Level: " + str(self.stats.level)
-        self.level_image = self.font.render(level_str, True, self.text_color, self.settings.bg_color) # generate the level text image
+        self.level_image = self.font.render(
+            # generate the level text image
+            level_str, True, self.text_color, self.settings.bg_color)
 
         # Position the level below the score
         self.level_rect = self.level_image.get_rect()
         self.level_rect.right = self.score_rect.right
-        self.level_rect.top = self.score_rect.bottom + 10 # position the level under the score
-
+        self.level_rect.top = self.score_rect.bottom + \
+            10  # position the level under the score
 
     def prep_score(self):
         """Turn the score into a rendered image."""
-        rounded_score = round(self.stats.score, -1) # round the number eg 100000 to 10,000
+        rounded_score = round(self.stats.score, -
+                            1)  # round the number eg 100000 to 10,000
         # add comma to the score
         score_str = "Score: " + "{:,}".format(rounded_score)
 
-        self.score_image = self.font.render(score_str, True , self.text_color, self.settings.bg_color)
+        self.score_image = self.font.render(
+            score_str, True, self.text_color, self.settings.bg_color)
 
         # Display the score at the top right of the screen.
         self.score_rect = self.score_image.get_rect()
@@ -65,24 +71,30 @@ class Scoreboard:
         """Turn the high score into a rendered image."""
         high_score = round(self.stats.high_score, - 1)
         self.high_score_str = "High Score: " + "{:,}".format(high_score)
-        self.high_score_image = self.font.render(self.high_score_str, True, self.text_color, self.settings.bg_color)
+        self.high_score_image = self.font.render(
+            self.high_score_str, True, self.text_color, self.settings.bg_color)
 
+        self.center_high_score()
+
+    def center_high_score(self):
+        """Center the game high score."""
         # Center the high score at the top of the screen.
-        self.high_score_rect = self.high_score_image.get_rect() # get the rect position of the high score
-        self.high_score_rect.centerx = self.screen_rect.centerx # set the high score at the center
-        self.high_score_rect.top = self.score_rect.top # position the high score at the top
-
-        """The appove code will center top the high score"""
+        # get the rect position of the high score
+        self.high_score_rect = self.high_score_image.get_rect()
+        # set the high score at the center
+        self.high_score_rect.centerx = self.screen_rect.centerx
+        # position the high score at the top
+        self.high_score_rect.top = self.score_rect.top
 
     def check_high_score(self):
         """Check to see if there's a new high score."""
         if self.stats.score > self.stats.high_score:
-            self.stats.high_score = self.stats.score # Update the high score
-            self.prep_high_score() # Update high score image
+            self.stats.high_score = self.stats.score  # Update the high score
+            self.prep_high_score()  # Update high score image
 
     def show_score(self):
         """Draw the score to the screen."""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
-        self.ships.draw(self.screen) # Draw the ships
+        self.lifes.draw(self.screen)  # Draw the lifes
