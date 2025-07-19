@@ -19,7 +19,7 @@ class Life(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
 
         # Load the image and get it rect
-        self.image = pygame.image.load('images/heart.bmp')
+        self.image = pygame.image.load('images/heart1.bmp')
         self.rect = self.image.get_rect()
 
         # Start each new heart at the bottom center on the screen
