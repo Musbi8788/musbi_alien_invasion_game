@@ -4,7 +4,6 @@ from time import sleep
 
 import pygame
 
-import pygame.mixer
 
 from settings import Settings
 from game_stats import GameStats
@@ -63,6 +62,7 @@ class AlienInvasion():
         
         self.medium_button = Button(
             self, "Medium", center=(center_x, 390), color=(0, 0, 255))
+        
         self.hard_button = Button(self, "Hard", center=(center_x, 470), color=(255, 0, 0))
         
 
