@@ -167,6 +167,7 @@ class AlienInvasion():
         self.sb.prep_score()  # Reset the score to 0
         self.sb.prep_level() # Reset the game level
         self.sb.prep_ships() # Reset the ships 
+        # self.sb.prep_images()
 
         self._start_game()
 
@@ -242,7 +243,12 @@ class AlienInvasion():
                 self.stats.score += self.settings.alien_points *len(aliens) # increase the player score when ever the bullet collided with an alien.
             self.sb.prep_score() # prepare the score
             self.sb.check_high_score() # update the high score
+
+
+        self._start_new_level() # New level of game
         
+    def _start_new_level(self):
+        """Respond to staring a new level"""
 
         # if aliens don't exist create a new fleet of aliens
         if not self.aliens:
@@ -254,6 +260,7 @@ class AlienInvasion():
             # Increase level
             self.stats.level += 1
             self.sb.prep_level() # update level image
+
 
     def _create_fleet(self):
         """Create the fleet of alien
