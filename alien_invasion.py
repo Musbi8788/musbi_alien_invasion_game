@@ -132,21 +132,46 @@ class AlienInvasion():
 
         if button_clicked and not self.stats.game_active: # Only make the button clickable when the game is inactive
             # Reset the game settings
-            self._set_difficulty("easy") # Start from level one
+            self._set_difficulty("easy") # Start from the easy level
+
+            # Rest the game statistics
+            self.reset_game_settings()
+
             
 
         # Only make the button clickable when the game is inactive
         elif medium_button_clicked and not self.stats.game_active:
             # Reset the game settings
             self._set_difficulty("medium")  # Start from medium level 
+
+            # Rest the game statistics
+            self.reset_game_settings()
+
             
 
         # Only make the button clickable when the game is inactive
         elif hard_button_clicked and not self.stats.game_active:
             # Reset the game settings
-            self._set_difficulty("hard")  # Start from hard level 
+            self._set_difficulty("hard")  # Start from the hard level
+
+            # Rest the game statistics
+            self.reset_game_settings()
+
+
+    def reset_game_settings(self):
+        """Reponse to resetting the game settings"""
+        # Rest the game statistics
+        self.stats.rest_stats()
+        self.stats.game_active = True
+        self.sb.prep_score()  # Reset the score to 0
+        self.sb.prep_level() # Reset the game level
+        self.sb.prep_ships() # Reset the ships 
 
         self._start_game()
+
+        pygame.mouse.set_visible(False)
+
+
 
     def _check_keydown_events(self, event):
         """Respond to key presses
@@ -206,8 +231,10 @@ class AlienInvasion():
             self.bullets, self.aliens, True , True)  # change False to True after
         
         if collisions:
-            self.stats.score += self.settings.alien_points # increase player score
-            self.sb.prep_score()
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points *len(aliens) # increase the player score when ever the bullet collided with an alien.
+            self.sb.prep_score() # prepare the score
+            self.sb.check_high_score() # update the high score
 
         # if aliens don't exist create a new fleet of aliens
         if not self.aliens:
@@ -215,6 +242,10 @@ class AlienInvasion():
             self.bullets.empty()  # destory the bullets
             self._create_fleet()  # create new fleet of aliens
             self.settings.increase_speed() # level up the game
+
+            # Increase level
+            self.stats.level += 1
+            self.sb.prep_level() # update level image
 
     def _create_fleet(self):
         """Create the fleet of alien
@@ -286,8 +317,10 @@ class AlienInvasion():
         # Allow the user to start over if ship is still available with them
         if self.stats.ships_left > 0:
 
-            # Decrement ships_left
+            # Decrement ships_left and update scoreboard
             self.stats.ships_left -= 1 
+            self.sb.prep_ships() 
+
 
             # Get rid of any remaining aliens and bullets
             self.aliens.empty()
