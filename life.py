@@ -22,8 +22,8 @@ class Life(Sprite):
         self.image = pygame.image.load('images/heart1.bmp')
         self.rect = self.image.get_rect()
 
-        # Start each new heart at the bottom center on the screen
-        self.rect.midbottom = self.screen_rect.midbottom
+        # Not need can be delete now
+        # self.rect.midbottom = self.screen_rect.midbottom
 
         # Store a decimal value for the heart's horizontal position.
         self.x = float(self.rect.x)

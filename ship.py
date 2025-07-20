@@ -1,7 +1,7 @@
 import pygame
-from pygame.sprite import Sprite
 
-class Ship(Sprite):
+
+class Ship:
     """A class to manage the ship.
     """
 
@@ -11,7 +11,7 @@ class Ship(Sprite):
         Args:
             ai_game (_type_): _description_
         """
-        super().__init__()
+        
 
         self.screen = ai_game.screen
         self.settings = ai_game.settings
