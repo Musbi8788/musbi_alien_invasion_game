@@ -11,7 +11,6 @@ class Ship:
         Args:
             ai_game (_type_): _description_
         """
-        
 
         self.screen = ai_game.screen
         self.settings = ai_game.settings
