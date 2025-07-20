@@ -52,6 +52,7 @@ class AlienInvasion():
         self.shooting_sfx = pygame.mixer.Sound("./sounds/shooting1.mp3")
         self.ship_sfx = pygame.mixer.Sound("./sounds/ship_hit.mp3")
 
+        # Create the initial fleet of aliens
         self._create_fleet()
 
         # Make the play buttons level
@@ -75,6 +76,7 @@ class AlienInvasion():
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
+
 
     def run_game(self):
         """Start the main loop for the game
@@ -108,7 +110,7 @@ class AlienInvasion():
 
     def _start_game(self):
         """Respond to start the game"""
-        if not self.stats.game_active:  # Allow user to start the game if the game is inactive
+        if not self.stats.game_active:  # Allow player's to start the game if the game is inactive
 
             # Reset the game statistics
             self.stats.rest_stats()
@@ -209,11 +211,12 @@ class AlienInvasion():
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_SPACE:
-            self._fire_bullet()
-            self.shooting_sfx.play()
+            if self.stats.game_active:
+                self._fire_bullet()
+                self.shooting_sfx.play()
 
         elif event.key == pygame.K_p:
-            self._start_game()  # Start as Easy with P key is pressed
+            self._start_game()  # Start as Easy Level when P key is pressed
 
         elif event.key == pygame.K_q:
             self._save_high_score()
