@@ -195,7 +195,8 @@ class AlienInvasion():
 
     def _save_high_score(self):
         """Store the high score in a text file"""
-        self.stats.read_high_score()
+        with open('high_score.txt', 'w') as save_score:
+            save_score.write(str(self.stats.high_score))
 
     def _check_keydown_events(self, event):
         """Respond to key presses
