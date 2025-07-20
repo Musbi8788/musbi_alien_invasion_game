@@ -21,6 +21,7 @@ class Scoreboard:
         self.high_score_color = (0, 100, 0)
         # set the font size and use defualt font style.
         self.font = pygame.font.SysFont('Arial', bold=True, size=30, italic=True)
+
         self.prep_images()
 
     def prep_images(self,):
@@ -28,18 +29,18 @@ class Scoreboard:
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
-        self.prep_lifes()  # will be change to life
+        self.prep_lifes()  
 
     def prep_lifes(self):
         """Show how many lifes left."""
         self.lifes = Group()  # set the lifes group
         for life_number in range(self.stats.ships_left):  # display the ships left
             life = Life(self.ai_game)  # create an instance of life
-            # Position the lifes left to the left top screen
+            # Position the lifes left to the left top of the screen
             life.rect.x = 10 + life_number * life.rect.width
             life.rect.y = 10
             self.lifes.add(life)  # add the lifes
-            """this make the ship appear next to each other (-_-)  (-_-)  (-_-) """
+            """this make the lifes appear next to each other (-_-)  (-_-)  (-_-) """
 
     def prep_level(self):
         """Turn the level into a rendered image."""
@@ -47,12 +48,14 @@ class Scoreboard:
         self.level_image = self.font.render(
             # generate the level text image
             level_str, True, self.level_color)
+        
 
         # Position the level below the score
         self.level_rect = self.level_image.get_rect()
         self.level_rect.right = self.score_rect.right
+
         self.level_rect.top = self.score_rect.bottom + \
-            10  # position the level under the score
+            10  # position the level under the score 
 
     def prep_score(self):
         """Turn the score into a rendered image."""
@@ -63,11 +66,12 @@ class Scoreboard:
 
         self.score_image = self.font.render(
             score_str, True, self.score_color)
+        
 
         # Display the score at the top right of the screen.
         self.score_rect = self.score_image.get_rect()
         self.score_rect.right = self.screen_rect.right - 20
-        self.score_rect.top = 20
+        self.score_rect.top = 20 
 
     def prep_high_score(self):
         """Turn the high score into a rendered image."""
@@ -75,6 +79,7 @@ class Scoreboard:
         self.high_score_str = "High Score: " + "{:,}".format(high_score)
         self.high_score_image = self.font.render(
             self.high_score_str, True, self.high_score_color)
+        
 
         self.center_high_score()
 
@@ -84,9 +89,9 @@ class Scoreboard:
         # get the rect position of the high score
         self.high_score_rect = self.high_score_image.get_rect()
         # set the high score at the center
-        self.high_score_rect.centerx = self.screen_rect.centerx
+        self.high_score_rect.centerx = self.screen_rect.centerx  # defualt centerx
         # position the high score at the top
-        self.high_score_rect.top = self.score_rect.top
+        self.high_score_rect.top = self.score_rect.top 
 
     def check_high_score(self):
         """Check to see if there's a new high score."""
