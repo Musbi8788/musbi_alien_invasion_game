@@ -69,6 +69,7 @@ The highest score is saved in high_score.txt, so you can always come back and tr
 
 ### 📸 Screenshots 
 ![The Game preview](images/game.png)
+![The Game preview](images/image.png)
 
 ## 🙌 Credits
 Built by Musbi Jawo
