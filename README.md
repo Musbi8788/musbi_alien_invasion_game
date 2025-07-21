@@ -5,16 +5,27 @@ A classic 2D shooting game built with Python and Pygame, where you control a spa
 File/Folder	Description
 
 ```images/```	Contains all image assets for the game
+
 ```sounds/	```Contains all game sound effects
+
 ```alien.py```	Controls alien behavior
+
 ```bullet.py```	Manages the bullet logic
+
 ```button.py```	Handles the play/difficulty button interface
+
 ```life.py```	Tracks player lives
+
 ```ship.py```	Controls the spaceship’s movement and shooting
+
 ``settings.py``	Stores game settings and difficulty parameters
+
 ```game_stats.py```	Manages game statistics (lives, score, etc.)
+
 ```scoreboard.py```	Displays score, high score, and level
+
 ```alien_invasion.py```	Main game file — starts the game
+
 ```high_score.txt```	Stores the highest score across sessions
 
 ### ✅ Requirements
