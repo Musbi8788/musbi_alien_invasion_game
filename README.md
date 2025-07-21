@@ -6,7 +6,7 @@ File/Folder	Description
 
 ```images/```	Contains all image assets for the game
 
-```sounds/	```Contains all game sound effects
+```sounds/```Contains all game sound effects
 
 ```alien.py```	Controls alien behavior
 
@@ -68,7 +68,7 @@ Hard	100 pts	Fast-paced, more aliens
 The highest score is saved in high_score.txt, so you can always come back and try to beat your record.
 
 ### 📸 Screenshots 
-You can add screenshots of gameplay here to give viewers a preview.
+![The Game preview](images/game.png)
 
 ## 🙌 Credits
 Built by Musbi Jawo
