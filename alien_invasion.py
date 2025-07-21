@@ -69,6 +69,9 @@ class AlienInvasion():
             self, "Medium", center=(center_x, 390), color=(0, 0, 255))
         
         self.hard_button = Button(self, "Hard", center=(center_x, 470), color=(255, 0, 0))
+
+        self.game_over = Button(self, "Game Over", center=(
+            800, 390), color=(200, 100, 255))
         
 
     def full_screen(self):
@@ -357,6 +360,8 @@ class AlienInvasion():
             self.sb.prep_lifes()
             self.ship_sfx.play()
             self.destory_ship_bullets_aliens()
+            self.game_over
+
 
             # Pause
             sleep(0.8)
@@ -396,6 +401,8 @@ class AlienInvasion():
         self.easy_button.draw_button()
         self.medium_button.draw_button()
         self.hard_button.draw_button()
+        if self.stats.ships_left == 0:
+            self.game_over.draw_button()
 
     def _update_screen(self):
         """Update image on the screen and flip to the new screen
