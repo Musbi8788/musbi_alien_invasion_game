@@ -3,6 +3,7 @@ import sys
 from time import sleep
 
 import pygame
+import pygame.mixer
 
 from settings import Settings
 from game_stats import GameStats
@@ -47,6 +48,11 @@ class AlienInvasion():
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
 
+        # Add sound effect
+        self.shooting_sfx = pygame.mixer.Sound("./sounds/shooting1.mp3")
+        self.ship_sfx = pygame.mixer.Sound("./sounds/ship_hit.mp3")
+
+        # Create the initial fleet of aliens
         self._create_fleet()
 
         # Make the play buttons level
@@ -61,7 +67,11 @@ class AlienInvasion():
         
         self.medium_button = Button(
             self, "Medium", center=(center_x, 390), color=(0, 0, 255))
+        
         self.hard_button = Button(self, "Hard", center=(center_x, 470), color=(255, 0, 0))
+
+        self.game_over = Button(self, "Game Over", center=(
+            800, 390), color=(200, 100, 255))
         
 
     def full_screen(self):
@@ -69,6 +79,7 @@ class AlienInvasion():
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
+
 
     def run_game(self):
         """Start the main loop for the game
@@ -102,7 +113,7 @@ class AlienInvasion():
 
     def _start_game(self):
         """Respond to start the game"""
-        if not self.stats.game_active:  # Allow user to start the game if the game is inactive
+        if not self.stats.game_active:  # Allow player's to start the game if the game is inactive
 
             # Reset the game statistics
             self.stats.rest_stats()
@@ -189,7 +200,8 @@ class AlienInvasion():
 
     def _save_high_score(self):
         """Store the high score in a text file"""
-        self.stats.read_high_score()
+        with open('high_score.txt', 'w') as save_score:
+            save_score.write(str(self.stats.high_score))
 
     def _check_keydown_events(self, event):
         """Respond to key presses
@@ -202,10 +214,12 @@ class AlienInvasion():
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_SPACE:
-            self._fire_bullet()
+            if self.stats.game_active:
+                self._fire_bullet()
+                self.shooting_sfx.play()
 
         elif event.key == pygame.K_p:
-            self._start_game()  # Start as Easy with P key is pressed
+            self._start_game()  # Start as Easy Level when P key is pressed
 
         elif event.key == pygame.K_q:
             self._save_high_score()
@@ -344,11 +358,13 @@ class AlienInvasion():
             # Decrement ships_left and update scoreboard
             self.stats.ships_left -= 1
             self.sb.prep_lifes()
-
+            self.ship_sfx.play()
             self.destory_ship_bullets_aliens()
+            self.game_over
+
 
             # Pause
-            sleep(0.5)
+            sleep(0.8)
 
         else:
             self.stats.game_active = False  # End the game
@@ -375,6 +391,8 @@ class AlienInvasion():
             if alien.rect.bottom >= screen_rect.bottom:
                 # Treat this the same as the ship got hit.
                 self._ship_hit()
+                # add sound
+                self.ship_sfx.play()
                 break
 
     def _draw_level_button(self):
@@ -383,6 +401,8 @@ class AlienInvasion():
         self.easy_button.draw_button()
         self.medium_button.draw_button()
         self.hard_button.draw_button()
+        if self.stats.ships_left == 0:
+            self.game_over.draw_button()
 
     def _update_screen(self):
         """Update image on the screen and flip to the new screen

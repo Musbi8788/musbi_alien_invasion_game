@@ -66,7 +66,7 @@ class Settings():
         
     def medium_speed(self):
         """Medium speed settings"""
-        self.ship_speed = 1.7
+        self.ship_speed = 1.9
         self.bullet_speed = 3.2
         self.alien_speed = 1.2
 
@@ -78,7 +78,7 @@ class Settings():
 
     def hard_speed(self):
         """Hard speed settings"""
-        self.ship_speed = 1.9
+        self.ship_speed = 2.5 
         self.bullet_speed = 3.0
         self.alien_speed = 1.4
 
