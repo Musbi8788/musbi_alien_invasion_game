@@ -73,6 +73,9 @@ class AlienInvasion():
         self.game_over = Button(self, "Game Over", center=(
             800, 390), color=(200, 100, 255))
         
+        self.pause_button = Button(
+            self, "Pause/Play", center=(300,20), color=(255, 0, 0))
+        
 
     def full_screen(self):
         """Create a fullscreen"""
@@ -401,6 +404,7 @@ class AlienInvasion():
         self.easy_button.draw_button()
         self.medium_button.draw_button()
         self.hard_button.draw_button()
+        self.pause_button.draw_button()
         if self.stats.ships_left == 0:
             self.game_over.draw_button()
 
