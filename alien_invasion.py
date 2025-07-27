@@ -74,7 +74,7 @@ class AlienInvasion():
             800, 390), color=(200, 100, 255))
         
         self.pause_button = Button(
-            self, "Pause/Play", center=(300,20), color=(255, 0, 0))
+            self, "Pause/Play('p')", center=(300,20), color=(255, 0, 0))
         
 
     def full_screen(self):
@@ -222,7 +222,10 @@ class AlienInvasion():
                 self.shooting_sfx.play()
 
         elif event.key == pygame.K_p:
-            self._start_game()  # Start as Easy Level when P key is pressed
+            if self.stats.game_active:
+                self.stats.game_active = False
+            elif not self.stats.game_active:
+                self.stats.game_active = True
 
         elif event.key == pygame.K_q:
             self._save_high_score()
@@ -404,9 +407,12 @@ class AlienInvasion():
         self.easy_button.draw_button()
         self.medium_button.draw_button()
         self.hard_button.draw_button()
-        self.pause_button.draw_button()
+
+    
         if self.stats.ships_left == 0:
             self.game_over.draw_button()
+        
+
 
     def _update_screen(self):
         """Update image on the screen and flip to the new screen
@@ -420,6 +426,9 @@ class AlienInvasion():
 
         # Draw the score information
         self.sb.show_score()
+        
+        # Draw the Pause button
+        self.pause_button.draw_button()
 
         # Draw the play buttons if the game is inactive.
         if not self.stats.game_active:
